@@ -1,14 +1,21 @@
 import meshblu
 import json
 
-
 def helloWorld():
     user = 'be685301-9fe6-11e4-b85d-3d2e85197d91'
     token = 'af6ba2d7383e789c8110ef74c3ab11d2c5144954'
     m = meshblu.MeshbluRestClient('http://meshblu.octoblu.com')
     m.setCredentials(user, token)
-    s = m.getMyDevices()
-    print json.dumps(s, sort_keys=True, indent=4, separators=(',', ': '))
+    devlist = m.getMyDevices()
+    print json.dumps(devlist, sort_keys=True, indent=4, separators=(',', ': '))
+#    dev = m.addDevice({'type':'device', 'id':'weio'})
+#    print "Execute following command from another terminal:"
+#    print "curl -X POST -H \"Content-Type: application/json\" -d '{\"devices\": \"" + "*" + "\", \
+#\"payload\": {\"yellow\":\"off\"}}' https://meshblu.octoblu.com/messages --header \
+#\"meshblu_auth_uuid: " + dev['uuid'] + "\" --header \"meshblu_auth_token: " + dev['token'] + "\""
+#    s = m.subscribeUuidBroadcast(dev['uuid'])
+#    print json.dumps(s, sort_keys=True, indent=4, separators=(',', ': '))
+
 
 def meshblutest():
     m = meshblu.MeshbluRestClient('http://meshblu.octoblu.com')
