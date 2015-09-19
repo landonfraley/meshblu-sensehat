@@ -2,8 +2,8 @@ import meshblu
 import json
 
 def helloWorld():
-    user = 'be685301-9fe6-11e4-b85d-3d2e85197d91'
-    token = 'af6ba2d7383e789c8110ef74c3ab11d2c5144954'
+    user = 'c8c691df-c00d-4132-a213-b48d8ef35619'
+    token = 'c08fcb144e689b270f4a5fbe6441a6138c13294f'
     m = meshblu.MeshbluRestClient('http://meshblu.octoblu.com')
     m.setCredentials(user, token)
     devlist = m.getMyDevices()
