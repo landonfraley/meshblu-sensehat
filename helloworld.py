@@ -14,7 +14,7 @@ def helloWorld():
         msg = s['payload']['message']
         print(msg)
         sense.show_message(msg)
-        if (msg == "landonf: shutdown test #sensehat"):
+        if (msg == "landonf: shutdown #makerfaire #octoblu"):
           exit()
 
 def main():
