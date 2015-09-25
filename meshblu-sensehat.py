@@ -1,14 +1,15 @@
 from sense_hat import SenseHat
 import meshblu
 import json
+import time
 
 def processTweets():
     flow = '0a603b74-bb62-4eda-bac8-7c823cc63b03'
 
     print "## attempting connection to Meshblu"
     m = meshblu.MeshbluRestClient('http://meshblu.octoblu.com')
-    s = m.getStatus()
-    print json.dumps(s, sort_keys=True, indent=2, separators=(',', ': '))
+    status = m.getStatus()
+    print json.dumps(status, sort_keys=True, indent=2, separators=(',', ': '))
     
     print "## initializing SenseHat"
     sense = SenseHat()
@@ -25,15 +26,28 @@ def processTweets():
         color = s['color']
         tweet = s['tweet']
         print(screen_name + ": " + tweet + ": " + color)
-        if (color == "red"):
-          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[255,0,0])
-        elif (color == "yellow"):
-          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[255,255,0])
-        else:
-          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[0,255,0])
         if (tweet.startswith("shutdown") and "#octoblu" in tweet and "#makerfaire" in tweet):
           print "## shutting down"
+          sense.clear([255,0,0])
+          time.sleep(1)
+          sense.clear([255,255,255])
+          time.sleep(1)
+          sense.clear([255,0,0])
+          time.sleep(1)
+          sense.clear()
           exit()
+        elif ("red" in color):
+          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[255,0,0])
+        elif ("yellow" in color):
+          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[255,255,0])
+        elif ("green" in color):
+          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[0,255,0])
+        else:
+          print "## bad/no data received"
+          sense.show_message(screen_name + ": " + tweet, scroll_speed=0.05, text_colour=[255,255,255])
+          sense.clear([255,0,0])
+          time.sleep(1)
+          sense.clear()
 
 def main():
     processTweets()
