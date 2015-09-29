@@ -10,7 +10,8 @@ def tracing(message):
   log.close()
 
 def processTweets():
-  # UUID for _your_ Twitter Sentiment Banner flow
+  # UUID for _your_ Twitter Sentiment Broadcast flow (to support customization)
+  # Ensure permissions so the flow can send message to Everyone
   flow = '0a603b74-bb62-4eda-bac8-7c823cc63b03'
 
   tracing('attempting connection to Meshblu')
